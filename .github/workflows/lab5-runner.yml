@@ -15,7 +15,7 @@ jobs:
   job_en_mi_maquina:
     # Depende del primer job y se ejecuta en tu runner local usando el label personalizado
     needs: job_en_la_nube
-    runs-on: [self-hosted, Windows]
+    runs-on: [self-hosted, Window]
     steps:
       - name: Checkout del código local
         uses: actions/checkout@v4
