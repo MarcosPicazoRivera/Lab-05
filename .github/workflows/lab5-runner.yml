@@ -1,0 +1,26 @@
+name: Lab 5 - Pipeline Híbrido y Troubleshooting
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  job_en_la_nube:
+    # Ejecuta en los servidores de GitHub (Hosted)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mensaje desde GitHub
+        run: echo "Hola, me estoy ejecutando en la nube de GitHub."
+
+  job_en_mi_maquina:
+    # Depende del primer job y se ejecuta en tu runner local usando el label personalizado
+    needs: job_en_la_nube
+    runs-on: [self-hosted, Windows]
+    steps:
+      - name: Checkout del código local
+        uses: actions/checkout@v4
+        
+      - name: Mensaje desde Local
+        run: |
+          echo "¡Hola! Me estoy ejecutando en la infraestructura propia de la empresa."
+          echo "El sistema operativo es: ${{ runner.os }}"
